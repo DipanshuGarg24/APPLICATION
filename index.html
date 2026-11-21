@@ -6,7 +6,7 @@
   <title>DRDO Representation Generator — HRA & Service Bond</title>
   <link rel="stylesheet" href="style.css">
   <!-- Client-side A4 PDF Generator (no server, no print dialog) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 </head>
 <body>
   <header class="topbar">
@@ -116,14 +116,14 @@
           </div>
         </fieldset>
 
-        <!-- SECTION 3: SERVICE BOND & MASTER'S DEGREE -->
+    <!-- SECTION 3: SERVICE BOND & MASTER'S DEGREE -->
         <fieldset>
           <legend>3. Service Bond &amp; Master’s Degree Ground</legend>
           <label class="toggle-box" for="hasMasters">
             <input type="checkbox" id="hasMasters" checked>
             <div>
               <strong>Include Master’s Degree (M.Tech or equivalent) Exemption</strong>
-              <small>Includes the Promissory Estoppel &amp; Article 14 clause regarding the verbal assurance given at joining that no service bond applies to Master’s degree holders.</small>
+              <small>Includes the ground regarding the verbal assurance given at joining that no service bond applies to Master’s degree holders.</small>
             </div>
           </label>
         </fieldset>
