@@ -41,21 +41,6 @@ body {
   padding-bottom: 24px;
 }
 
-.info-banner {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  background: var(--ac-soft);
-  border: 1px solid var(--ac);
-  border-left-width: 4px;
-  color: var(--tx);
-  border-radius: 10px;
-  padding: 10px 12px;
-  margin-bottom: 14px;
-  font-size: 0.83rem;
-  line-height: 1.4;
-}
-
 /* Top Navbar */
 .topbar {
   background: var(--surface);
@@ -135,7 +120,7 @@ body {
   min-width: 36px;
 }
 
-/* Mobile Tabs (Hidden on Desktop) */
+/* Mobile Tabs */
 .mobile-tabs {
   display: none;
   grid-template-columns: 1fr 1fr;
@@ -168,7 +153,7 @@ body {
   margin: 18px auto;
   padding: 0 18px;
   display: grid;
-  grid-template-columns: 470px 1fr;
+  grid-template-columns: 460px 1fr;
   gap: 24px;
   align-items: start;
 }
@@ -179,7 +164,7 @@ body {
   border: 1px solid var(--bd);
   border-radius: 12px;
   padding: 12px 14px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   box-shadow: var(--shadow);
 }
 
@@ -204,6 +189,22 @@ body {
   width: 0%;
   background: var(--ok);
   transition: width 0.25s ease;
+}
+
+/* Info Banner */
+.info-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: var(--ac-soft);
+  border: 1px solid var(--ac);
+  border-left-width: 4px;
+  color: var(--tx);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  font-size: 0.83rem;
+  line-height: 1.4;
 }
 
 /* Form Cards */
@@ -252,7 +253,7 @@ select {
   background: var(--surface-alt);
   color: var(--tx);
   font: inherit;
-  font-size: 16px; /* Prevents mobile Safari/Chrome auto-zoom */
+  font-size: 16px;
   min-height: 42px;
   transition: border-color 0.15s, box-shadow 0.15s;
 }
@@ -340,6 +341,11 @@ select:focus {
   transform: scale(0.98);
 }
 
+.btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
 .btn.primary {
   grid-column: 1 / -1;
   background: var(--ac);
@@ -409,14 +415,14 @@ select:focus {
   padding: 2px 6px 24px;
 }
 
-/* Simulated A4 Sheet */
+/* Simulated A4 Sheet with reduced left/right margins */
 .a4-sheet {
   background: #ffffff;
   color: #111111;
   font-family: Calibri, "Segoe UI", Arial, sans-serif;
   font-size: 10.5pt;
-  line-height: 1.38;
-  padding: 38px 44px;
+  line-height: 1.36;
+  padding: 28px 26px; /* Narrower side margins matching 1.27cm A4 export */
   border-radius: 6px;
   box-shadow: var(--paper-shadow);
   border: 1px solid #d1d5db;
@@ -424,7 +430,7 @@ select:focus {
 }
 
 .a4-sheet p {
-  margin: 0 0 7pt;
+  margin: 0 0 6.5pt;
   text-align: justify;
 }
 
@@ -433,30 +439,30 @@ select:focus {
   color: #1b365d;
   border-bottom: 1px solid #1b365d;
   padding-bottom: 2pt;
-  margin: 14pt 0 6pt;
+  margin: 13pt 0 6pt;
   font-size: 11pt;
   text-align: left;
 }
 
 .a4-sheet .doc-sub {
   font-weight: 700;
-  margin: 9pt 0 4pt;
+  margin: 8pt 0 3.5pt;
   text-align: left;
 }
 
 .a4-sheet ul,
 .a4-sheet ol {
-  margin: 0 0 6pt 18pt;
+  margin: 0 0 6pt 16pt;
   padding: 0;
 }
 
 .a4-sheet li {
-  margin: 0 0 4pt;
+  margin: 0 0 3.5pt;
   text-align: justify;
 }
 
 .a4-sheet ul ul {
-  margin: 3pt 0 3pt 16pt;
+  margin: 3pt 0 3pt 14pt;
   list-style-type: circle;
 }
 
@@ -484,7 +490,6 @@ select:focus {
     padding: 0 12px;
   }
 
-  /* Switch between Form and Preview on mobile */
   .workspace.view-form .preview-panel {
     display: none;
   }
@@ -503,7 +508,7 @@ select:focus {
   }
 
   .a4-sheet {
-    padding: 20px 18px;
+    padding: 18px 16px;
     font-size: 10pt;
   }
 
@@ -517,10 +522,9 @@ select:focus {
     gap: 10px;
   }
 
-  /* Sticky Bottom Bar on Mobile */
   .mobile-bottom-bar {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
+    grid-template-columns: 1.2fr 1fr;
     gap: 10px;
     position: fixed;
     bottom: 0;
@@ -551,5 +555,4 @@ select:focus {
   .brand h1 {
     font-size: 0.98rem;
   }
-  
 }

@@ -11,7 +11,7 @@
     phone: "+91 ",
     email: "",
     joinDate: "2026-07-01",
-    letterDate: "", // Populated with today's date if empty
+    letterDate: "",
     offerNo: "DRDO-HRV/O5(DRDS-III)56091/ADVT-156/",
     offerDate: "xx June 2026",
     hasMasters: true
@@ -31,20 +31,6 @@
     "offerDate"
   ];
 
-  // Count meaningful entries (excluding untouched starter prefixes/templates)
-  function isMeaningfullyFilled(id) {
-    var v = $(id).value.trim();
-    if (!v) return false;
-    var def = (DEFAULTS[id] || "").trim();
-    if (id === "appNo" && v === "Advt156/") return false;
-    if (id === "pisId" && v === "2026AB") return false;
-    if (id === "phone" && (v === "+91" || v === "+91-")) return false;
-    if (id === "offerNo" && v === "DRDO-HRV/O5(DRDS-III)56091/ADVT-156/") return false;
-    if (id === "offerDate" && v.toLowerCase() === "xx june 2026") return false;
-    if (id === "joinDate" && v === def) return true; // Default joining date counts as filled
-    return true;
-  }
-
   var reqIds = [
     "fullName",
     "appNo",
@@ -63,6 +49,19 @@
   };
   var st = $("st");
   var mem = {};
+
+  function isMeaningfullyFilled(id) {
+    var v = $(id).value.trim();
+    if (!v) return false;
+    var def = (DEFAULTS[id] || "").trim();
+    if (id === "appNo" && v === "Advt156/") return false;
+    if (id === "pisId" && v === "2026AB") return false;
+    if (id === "phone" && (v === "+91" || v === "+91-")) return false;
+    if (id === "offerNo" && v === "DRDO-HRV/O5(DRDS-III)56091/ADVT-156/") return false;
+    if (id === "offerDate" && v.toLowerCase() === "xx june 2026") return false;
+    if (id === "joinDate" && v === def) return true;
+    return true;
+  }
 
   function getTodayISO() {
     var d = new Date();
@@ -114,9 +113,6 @@
         $(id).value = DEFAULTS[id];
       }
     });
-    if (typeof $("hasMasters").checked !== "boolean") {
-      $("hasMasters").checked = DEFAULTS.hasMasters;
-    }
   }
 
   function load() {
@@ -370,7 +366,9 @@
         "<ul>" +
           "<li>At the time of joining the organisation, the officials concerned <b>clearly and repeatedly stated verbally</b> that <b>no service bond would be applicable to those who had already completed their Master’s degree (M.Tech or equivalent)</b>.</li>" +
           "<li>Despite this, a service bond is now being imposed on these Scientists as well, who already hold a Master’s degree, without any written order, circular, or amendment withdrawing the assurance given. No reason or policy basis for this change has been communicated.</li>" +
-         "</ul>"
+          "<li>A candidate who has acted on a clear and repeated assurance by a public authority, and has altered his/her position on that basis, acquires a legitimate expectation that it will be honoured. Under the doctrine of <b>promissory estoppel</b> (as applied against the State in <i>Motilal Padampat Sugar Mills Co. Ltd. v. State of U.P.</i>, (1979) 2 SCC 409), a public authority cannot arbitrarily resile from such an assurance. Any departure must be backed by a written policy decision and a reasoned order.</li>" +
+          "<li>The imposition of a bond on Master’s degree holders, contrary to the assurance given and without any notified policy, is also arbitrary and violative of <b>Article 14 of the Constitution</b>. Accordingly, it is requested that I be exempted from execution of the Service Bond, or in the alternative, that the authority under which the exemption has been withdrawn be communicated in writing.</li>" +
+          "</ul>"
       );
     }
 
@@ -458,25 +456,29 @@
     return h.join("\n");
   }
 
-  function buildWordDoc() {
-    var css =
-      "@page { size: A4; margin: 2cm 2cm 2cm 2cm; }" +
-      "body { font-family: Calibri, Arial, sans-serif; font-size: 10.5pt; line-height: 1.35; color: #000000; }" +
+  // Shared print/export CSS with narrower left & right margins (12.7mm / 0.5in)
+  function getDocumentCSS() {
+    return (
+      "@page { size: A4; margin: 1.5cm 1.27cm 1.5cm 1.27cm; }" +
+      "body { font-family: Calibri, Arial, sans-serif; font-size: 10.5pt; line-height: 1.35; color: #000000; margin: 0; padding: 0; }" +
       "p { margin: 0pt 0pt 6pt 0pt; text-align: justify; mso-pagination: widow-orphan; }" +
-      "p.doc-part { font-weight: bold; color: #1b365d; border-bottom: 1pt solid #1b365d; padding-bottom: 2pt; margin-top: 12pt; margin-bottom: 6pt; font-size: 11pt; text-align: left; page-break-after: avoid; }" +
-      "p.doc-sub { font-weight: bold; margin-top: 8pt; margin-bottom: 3pt; text-align: left; page-break-after: avoid; }" +
-      "ul { margin-top: 0pt; margin-bottom: 6pt; margin-left: 22pt; padding-left: 0pt; list-style-type: disc; }" +
-      "ul ul { margin-top: 2pt; margin-bottom: 2pt; margin-left: 18pt; padding-left: 0pt; list-style-type: circle; }" +
-      "ol { margin-top: 0pt; margin-bottom: 6pt; margin-left: 22pt; padding-left: 0pt; }" +
-      "li { margin-top: 0pt; margin-bottom: 4pt; text-align: justify; mso-pagination: widow-orphan; }";
+      "p.doc-part { font-weight: bold; color: #1b365d; border-bottom: 1pt solid #1b365d; padding-bottom: 2pt; margin-top: 11pt; margin-bottom: 5pt; font-size: 11pt; text-align: left; page-break-after: avoid; break-after: avoid; }" +
+      "p.doc-sub { font-weight: bold; margin-top: 7.5pt; margin-bottom: 3pt; text-align: left; page-break-after: avoid; break-after: avoid; }" +
+      "ul { margin-top: 0pt; margin-bottom: 5.5pt; margin-left: 16pt; padding-left: 0pt; list-style-type: disc; }" +
+      "ul ul { margin-top: 2pt; margin-bottom: 2pt; margin-left: 14pt; padding-left: 0pt; list-style-type: circle; }" +
+      "ol { margin-top: 0pt; margin-bottom: 5.5pt; margin-left: 16pt; padding-left: 0pt; }" +
+      "li { margin-top: 0pt; margin-bottom: 3.5pt; text-align: justify; mso-pagination: widow-orphan; page-break-inside: avoid; break-inside: avoid; }"
+    );
+  }
 
+  function buildWordDoc() {
     return (
       '<html xmlns:o="urn:schemas-microsoft-com:office:office" ' +
       'xmlns:w="urn:schemas-microsoft-com:office:word" ' +
       'xmlns="http://www.w3.org/TR/REC-html40">' +
       "<head><meta charset=\"utf-8\"><title>HRA and Bond Representation</title>" +
       "<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->" +
-      "<style>" + css + "</style></head>" +
+      "<style>" + getDocumentCSS() + "</style></head>" +
       "<body>" + buildBodyHTML(false) + "</body></html>"
     );
   }
@@ -485,37 +487,90 @@
     $("previewSheet").innerHTML = buildBodyHTML(true);
   }
 
+  function getCleanFileName(ext) {
+    var cleanName = ($("fullName").value.trim() || "Scientist_B").replace(/[^\w]+/g, "_");
+    return "HRA_and_Bond_Representation_" + cleanName + "." + ext;
+  }
+
+  // Download .doc
   function downloadDoc() {
     save(true);
     var blob = new Blob(["\ufeff" + buildWordDoc()], {
       type: "application/msword;charset=utf-8"
     });
     var a = document.createElement("a");
-    var cleanName = ($("fullName").value.trim() || "Scientist_B").replace(/[^\w]+/g, "_");
     a.href = URL.createObjectURL(blob);
-    a.download = "HRA_and_Bond_Representation_" + cleanName + ".doc";
+    a.download = getCleanFileName("doc");
     document.body.appendChild(a);
     a.click();
     a.remove();
     setTimeout(function () {
       URL.revokeObjectURL(a.href);
     }, 4000);
-    st.textContent = "Downloaded Word document ✓";
+    st.textContent = "Downloaded Word (.doc) ✓";
   }
 
-  function printDoc() {
+  // Direct A4 PDF Download (no print dialog)
+  function downloadPDF() {
     save(true);
-    var w = window.open("", "_blank");
-    if (!w) {
-      st.textContent = "Pop-up blocked — please allow pop-ups or download the .doc file.";
+    if (typeof window.html2pdf === "undefined") {
+      st.textContent = "PDF engine still loading — please try again in a second.";
       return;
     }
-    w.document.write(buildWordDoc());
-    w.document.close();
-    w.focus();
-    setTimeout(function () {
-      w.print();
-    }, 300);
+
+    var pdfBtns = document.querySelectorAll(".pdf-btn");
+    pdfBtns.forEach(function (b) {
+      b.disabled = true;
+    });
+    st.textContent = "Generating A4 PDF… please wait";
+
+    // Build an isolated A4-width container (210mm - 2*12.7mm = 184.6mm inner width)
+    var wrapper = document.createElement("div");
+    wrapper.style.width = "184.6mm";
+    wrapper.style.background = "#ffffff";
+    wrapper.style.color = "#000000";
+    wrapper.innerHTML =
+      "<style>" + getDocumentCSS() + "</style>" +
+      '<div class="pdf-root">' + buildBodyHTML(false) + "</div>";
+
+    var opt = {
+      margin: [14, 12.7, 14, 12.7], // [top, left, bottom, right] in mm (0.5 in left/right)
+      filename: getCleanFileName("pdf"),
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        letterRendering: true,
+        backgroundColor: "#ffffff"
+      },
+      jsPDF: {
+        unit: "mm",
+        format: "a4",
+        orientation: "portrait"
+      },
+      pagebreak: {
+        mode: ["css", "legacy"],
+        avoid: ["li", ".doc-part", ".doc-sub"]
+      }
+    };
+
+    window
+      .html2pdf()
+      .set(opt)
+      .from(wrapper)
+      .save()
+      .then(function () {
+        pdfBtns.forEach(function (b) {
+          b.disabled = false;
+        });
+        st.textContent = "Downloaded A4 PDF ✓";
+      })
+      .catch(function () {
+        pdfBtns.forEach(function (b) {
+          b.disabled = false;
+        });
+        st.textContent = "Could not generate PDF. Please try downloading .doc instead.";
+      });
   }
 
   function copyDoc() {
@@ -531,7 +586,6 @@
     }
   }
 
-  // Reset to smart defaults (not blank!)
   function resetToDefaults() {
     if (!confirm("Reset all fields back to default prefixes & values?")) return;
     try {
@@ -549,8 +603,8 @@
   document.querySelectorAll(".dl-btn").forEach(function (b) {
     b.addEventListener("click", downloadDoc);
   });
-  document.querySelectorAll(".pr-btn").forEach(function (b) {
-    b.addEventListener("click", printDoc);
+  document.querySelectorAll(".pdf-btn").forEach(function (b) {
+    b.addEventListener("click", downloadPDF);
   });
   document.querySelectorAll(".cp-btn").forEach(function (b) {
     b.addEventListener("click", copyDoc);

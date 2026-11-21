@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>DRDO Representation Generator — HRA & Service Bond</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Client-side A4 PDF Generator (no server, no print dialog) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
 </head>
 <body>
   <header class="topbar">
@@ -29,7 +31,7 @@
   <main class="workspace view-form" id="workspace">
     <!-- LEFT: FORM PANEL -->
     <section class="form-panel" id="formPanel">
-     <div class="progress-card">
+      <div class="progress-card">
         <div class="progress-header">
           <span>Completion Status</span>
           <span id="progText">0 / 10 completed</span>
@@ -97,7 +99,7 @@
               <input id="joinDate" type="date">
             </div>
             <div class="field">
-              <label for="letterDate">Representation Date <span class="req">*</span></label>
+              <label for="letterDate">Date of Letter <span class="req">*</span></label>
               <input id="letterDate" type="date">
             </div>
           </div>
@@ -121,7 +123,7 @@
             <input type="checkbox" id="hasMasters" checked>
             <div>
               <strong>Include Master’s Degree (M.Tech or equivalent) Exemption</strong>
-              <small>Include the verbal assurance given at joining that no service bond applies to Master’s degree holders.</small>
+              <small>Includes the Promissory Estoppel &amp; Article 14 clause regarding the verbal assurance given at joining that no service bond applies to Master’s degree holders.</small>
             </div>
           </label>
         </fieldset>
@@ -129,9 +131,9 @@
         <!-- DESKTOP ACTION BAR -->
         <div class="action-bar desktop-actions">
           <button type="button" class="btn primary dl-btn">⬇ Download Word (.doc)</button>
-          <button type="button" class="btn secondary pr-btn">🖨 Print / Save PDF</button>
+          <button type="button" class="btn secondary pdf-btn">📄 Save as PDF (A4)</button>
           <button type="button" class="btn ghost cp-btn">📋 Copy Text</button>
-          <button type="button" class="btn danger clr-btn">Reset to Default Defaults</button>
+          <button type="button" class="btn danger clr-btn">Reset to Defaults</button>
         </div>
 
         <div class="mobile-secondary-actions">
@@ -158,9 +160,9 @@
   <!-- STICKY MOBILE BOTTOM BAR -->
   <footer class="mobile-bottom-bar">
     <button type="button" class="btn primary dl-btn">⬇ Download .doc</button>
-    <button type="button" class="btn secondary pr-btn">🖨 Print / PDF</button>
+    <button type="button" class="btn secondary pdf-btn">📄 Save as PDF</button>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
