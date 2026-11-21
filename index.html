@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>DRDO Representation Generator — HRA & Service Bond</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="badge">DRDO · Advt. 156</span>
+        <h1>HRA &amp; Service Bond Letter</h1>
+      </div>
+      <div class="top-actions">
+        <span class="privacy-pill" title="100% client-side. Nothing leaves your device.">🔒 Local-Only</span>
+        <button type="button" id="themeBtn" class="icon-btn" aria-label="Toggle theme" title="Toggle Dark/Light Theme">🌓</button>
+      </div>
+    </div>
+
+    <!-- Mobile View Switcher Tabs -->
+    <nav class="mobile-tabs" aria-label="View Switcher">
+      <button type="button" class="tab-btn active" data-view="form">✏️ Edit Details</button>
+      <button type="button" class="tab-btn" data-view="preview">📄 Live Preview</button>
+    </nav>
+  </header>
+
+  <main class="workspace view-form" id="workspace">
+    <!-- LEFT: FORM PANEL -->
+    <section class="form-panel" id="formPanel">
+     <div class="progress-card">
+        <div class="progress-header">
+          <span>Completion Status</span>
+          <span id="progText">0 / 10 completed</span>
+        </div>
+        <div class="progress-bar"><div id="progFill"></div></div>
+      </div>
+
+      <div class="info-banner" role="note">
+        ℹ️ <span>Common prefixes and dates are pre-filled for your convenience — <strong>please edit all fields according to your own information</strong> before downloading.</span>
+      </div>
+
+      <form id="f" autocomplete="off" onsubmit="return false">
+        <!-- SECTION 1: OFFICER DETAILS -->
+        <fieldset>
+          <legend>1. Officer &amp; Recruitment Details</legend>
+          <div class="field">
+            <label for="fullName">Full Name <span class="req">*</span></label>
+            <input id="fullName" placeholder="e.g. Dipanshu Garg">
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="appNo">Application No. <span class="req">*</span></label>
+              <input id="appNo" placeholder="Advt156/...">
+            </div>
+            <div class="field">
+              <label for="pisId">PIS / Employee ID <span class="req">*</span></label>
+              <input id="pisId" placeholder="2026ABxxxx">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="discipline">Discipline <span class="req">*</span></label>
+              <input id="discipline" placeholder="e.g. Computer Science &amp; Engg.">
+            </div>
+            <div class="field">
+              <label for="track">Training Track <span class="req">*</span></label>
+              <select id="track">
+                <option value="">Select training track…</option>
+                <option value="points">6-Month Post-Induction Training (POINTS)</option>
+                <option value="mtech">2-Year M.Tech (EX POINTS)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="phone">Mobile Number <span class="req">*</span></label>
+              <input id="phone" type="tel" placeholder="+91 9876543210">
+            </div>
+            <div class="field">
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input id="email" type="email" placeholder="e.g. name@gmail.com">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- SECTION 2: JOINING & OFFER LETTER -->
+        <fieldset>
+          <legend>2. Joining &amp; Offer Letter Particulars</legend>
+          <div class="row">
+            <div class="field">
+              <label for="joinDate">Date of Joining DRDO <span class="req">*</span></label>
+              <input id="joinDate" type="date">
+            </div>
+            <div class="field">
+              <label for="letterDate">Representation Date <span class="req">*</span></label>
+              <input id="letterDate" type="date">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="offerNo">Offer Letter No. <span class="req">*</span></label>
+              <input id="offerNo" placeholder="DRDO-HRV/O5(DRDS-III)56091/ADVT-156/...">
+            </div>
+            <div class="field">
+              <label for="offerDate">Offer Letter Date <span class="req">*</span></label>
+              <input id="offerDate" placeholder="xx June 2026">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- SECTION 3: SERVICE BOND & MASTER'S DEGREE -->
+        <fieldset>
+          <legend>3. Service Bond &amp; Master’s Degree Ground</legend>
+          <label class="toggle-box" for="hasMasters">
+            <input type="checkbox" id="hasMasters" checked>
+            <div>
+              <strong>Include Master’s Degree (M.Tech or equivalent) Exemption</strong>
+              <small>Include the verbal assurance given at joining that no service bond applies to Master’s degree holders.</small>
+            </div>
+          </label>
+        </fieldset>
+
+        <!-- DESKTOP ACTION BAR -->
+        <div class="action-bar desktop-actions">
+          <button type="button" class="btn primary dl-btn">⬇ Download Word (.doc)</button>
+          <button type="button" class="btn secondary pr-btn">🖨 Print / Save PDF</button>
+          <button type="button" class="btn ghost cp-btn">📋 Copy Text</button>
+          <button type="button" class="btn danger clr-btn">Reset to Default Defaults</button>
+        </div>
+
+        <div class="mobile-secondary-actions">
+          <button type="button" class="btn ghost cp-btn">📋 Copy Plain Text</button>
+          <button type="button" class="btn danger clr-btn">Reset Defaults</button>
+        </div>
+
+        <div id="st" class="status-msg" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- RIGHT: LIVE DOCUMENT PREVIEW -->
+    <section class="preview-panel" id="previewPanel">
+      <div class="preview-toolbar">
+        <span>Live A4 Document Preview</span>
+        <span class="hint">Auto-updates as you type</span>
+      </div>
+      <div class="paper-wrap">
+        <article id="previewSheet" class="a4-sheet"></article>
+      </div>
+    </section>
+  </main>
+
+  <!-- STICKY MOBILE BOTTOM BAR -->
+  <footer class="mobile-bottom-bar">
+    <button type="button" class="btn primary dl-btn">⬇ Download .doc</button>
+    <button type="button" class="btn secondary pr-btn">🖨 Print / PDF</button>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
